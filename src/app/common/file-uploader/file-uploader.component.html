@@ -1,0 +1,15 @@
+<input
+  id="file-uploader"
+  type="file"
+  [accept]="acceptTypes"
+  (change)="handleUpload($event)"
+  #fileSelector
+/>
+<div class="file-block">
+  <p title="Please upload an image" class="file-name">
+    {{ fileName }}
+  </p>
+  <p class="file-error">{{ errorMessage }}</p>
+</div>
+
+<button class="btn btn-primary" (click)="openFilePicker()">Add</button>

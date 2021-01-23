@@ -1,0 +1,46 @@
+@import 'src/assets/styles/variables'
+
+*
+  font-family Roboto, sans-serif
+  color $light-gray
+
+body
+  background $white
+
+.container
+  max-width 1232px
+  padding 0 64px
+  margin 0 auto
+
+  @media only screen and (min-width 1200px max-width 1400px)
+    max-width 1140px
+
+  @media only screen and (min-width 992px max-width 1199px)
+    max-width 960px
+
+  @media only screen and (max-width 991px)
+    padding 0 32px
+
+  @media only screen and (min-width 768px max-width 991px)
+    max-width 720px
+
+  @media only screen and (min-width 576px max-width 767px)
+    max-width 540px
+
+  @media only screen and (max-width 575px)
+    max-width 100%
+    padding 0 16px
+
+.btn
+  pb-border-radius(6px)
+  border 1px solid $light-blue
+  padding 5px 25px
+  font-size 12px
+
+.btn-primary
+  background $light-blue
+  color $white
+
+.btn-secondary
+  background $white
+  color $light-blue
