@@ -33,6 +33,7 @@ export class FileUploaderComponent implements OnInit {
   fileName = '';
   errorMessage = '';
   percentDone = 0;
+  transitionDuration = 0.25;
 
   private _acceptedTypesArray: string[] = ['image/jpeg', 'image/png'];
   private _allowedExtensions = 'jpg, png';
@@ -78,6 +79,7 @@ export class FileUploaderComponent implements OnInit {
         switch (status.type) {
           case HttpEventType.Sent: {
             this.percentDone = 0;
+            this.transitionDuration = 0.25;
             break;
           }
 
@@ -88,21 +90,28 @@ export class FileUploaderComponent implements OnInit {
             if (this.percentDone < currentProgress) {
               this.percentDone = currentProgress;
             }
+            if (status.loaded === status.total) {
+              setTimeout(() => {
+                this.transitionDuration = 1.5;
+                this.percentDone = 0;
+              }, 1500);
+            }
             break;
           }
 
           case HttpEventType.Response: {
-            if (status.body && status.body['newName'] && status.body['url']) {
+            if (
+              status.body &&
+              status.body['optimizedUrl'] &&
+              status.body['url']
+            ) {
               this.fileUploaded.emit({
-                name: fileToUpload.name,
-                newName: status.body['newName'],
+                _id: status.body['_id'],
+                optimizedUrl: status.body['optimizedUrl'],
                 url: status.body['url'],
               });
-            } else {
-              this.errorMessage = status.body['message']
-                ? `${status.body['message']} (${fileToUpload.name})`
-                : this.errorMessage;
             }
+
             subscription$.unsubscribe();
             break;
           }
@@ -111,9 +120,12 @@ export class FileUploaderComponent implements OnInit {
             break;
         }
       },
-      (error) => {
-        console.error(error);
-        this.errorMessage = error;
+      (err) => {
+        this.errorMessage =
+          err.error && err.error.message
+            ? err.error.message
+            : 'There was an error trying to process your file!';
+
         subscription$.unsubscribe();
       }
     );

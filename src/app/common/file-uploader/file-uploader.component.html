@@ -6,9 +6,17 @@
   #fileSelector
 />
 <div class="file-block">
-  <p title="Please upload an image" class="file-name">
-    {{ fileName }}
-  </p>
+  <div class="uploading-bar">
+    <div
+      class="bar-progress"
+      [ngStyle]="{
+        width: percentDone + '%',
+        'transition-duration': transitionDuration + 's'
+      }"
+    >
+      <div class="bar-progress__text">File successfully uploaded!</div>
+    </div>
+  </div>
   <p class="file-error">{{ errorMessage }}</p>
 </div>
 

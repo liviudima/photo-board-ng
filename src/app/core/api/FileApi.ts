@@ -8,15 +8,22 @@ export class FileApi {
   constructor(private _http: HttpClient) {}
 
   upload(file: File) {
-    const formData = new FormData();
-    formData.append('photo', file, file.name);
-    // const req = new HttpRequest('POST', `${environment.apiHostUrl}/photo`, formData, {
-    //   reportProgress: true,
-    // });
+    try {
+      const formData = new FormData();
+      formData.append('photo', file, file.name);
+      const req = new HttpRequest(
+        'POST',
+        `${environment.apiHostUrl}/photo`,
+        formData,
+        {
+          reportProgress: true,
+        }
+      );
 
-    return this._http.post(`${environment.apiHostUrl}/photo`, formData, {
-      reportProgress: true,
-    });
+      return this._http.request(req);
+    } catch (err) {
+      return err.error.message;
+    }
   }
 
   async delete(fileName: string): Promise<void> {

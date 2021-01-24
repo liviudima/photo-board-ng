@@ -1,7 +1,5 @@
 export interface IUploadedFile {
-  name: string;
-  newName: string;
+  _id: string;
+  optimizedUrl: string;
   url: string;
-  size?: number;
-  type?: string;
 }
