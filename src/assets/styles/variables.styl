@@ -2,8 +2,20 @@ $white = #FFF
 $light-gray = #7F7F7F
 $light-blue = #169bd5
 $asorted-red = #ef655f
+$black = #0C0C0C
 
 pb-border-radius(n)
   -webkit-border-radius n
   -moz-border-radius n
   border-radius n
+
+flexbox($display, $flexDirection, $flexWrap, $justifyContent, $alignItems)
+    display: $display;
+    flex-direction: $flexDirection;
+    flex-wrap: $flexWrap;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+
+size(n)
+  width n
+  height n

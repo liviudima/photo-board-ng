@@ -20,4 +20,10 @@
   <p class="file-error">{{ errorMessage }}</p>
 </div>
 
-<button class="btn btn-primary" (click)="openFilePicker()">Add</button>
+<button
+  class="btn btn-primary"
+  (click)="openFilePicker()"
+  [disabled]="disabled"
+>
+  Add
+</button>

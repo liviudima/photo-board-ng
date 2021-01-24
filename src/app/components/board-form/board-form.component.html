@@ -1,0 +1,21 @@
+<form [formGroup]="boardForm">
+  <div id="input-name">
+    <input
+      type="text"
+      placeholder="Please add board name"
+      id="board__form--name"
+      class="inpt"
+      formControlName="name"
+    />
+    <p *ngIf="validateInput()" class="error">
+      {{ nameError }}
+    </p>
+    <p *ngIf="!!serverError" class="error">
+      {{ serverError }}
+    </p>
+  </div>
+
+  <button class="btn btn-primary f-right" (click)="createBoard()">
+    Create Board
+  </button>
+</form>

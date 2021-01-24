@@ -1,0 +1,24 @@
+<div [hidden]="!isOpen" class="pb-modal" tabindex="-1" role="dialog">
+  <div #modal class="pb-modal__content centered">
+    <div class="pb-modal__header">
+      <h5 class="pb-modal__header-title">{{ title }}</h5>
+      <div
+        *ngIf="isDismissable"
+        class="pb-modal__header-close"
+        (click)="hide()"
+        data-dismiss="pb-modal"
+        aria-label="Close"
+      ></div>
+    </div>
+
+    <div class="pb-modal__body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="isOpen"
+  class="pb-modal__backdrop"
+  (click)="isDismissable ? hide() : return"
+></div>

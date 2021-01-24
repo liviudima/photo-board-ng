@@ -1,0 +1,108 @@
+@import 'src/assets/styles/variables'
+
+.pb-modal
+  position fixed
+  z-index 1050
+  outline 0
+
+
+  &__content
+    size(100%)
+    position fixed
+    pointer-events none
+    align-items center
+    flex-direction column
+    pointer-events auto
+    background-color $white
+    background-clip padding-box
+    outline 0
+
+    &.centered
+      size(auto)
+      max-height 880px;
+      max-width 960px;
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      box-shadow 0px 10px 10px rgba(63, 69, 78, .25), 0px 0px 3px rgba(54, 60, 71, .15)
+      border-radius 10px
+
+      @media only screen and (max-width: 1024px)
+        top 0
+        left 0
+        right 0
+        bottom 0
+        -webkit-transform none
+        -moz-transform none
+        -ms-transform none
+        -o-transform none
+        transform none
+        max-width 100%
+        overflow auto
+
+  &__header
+    flexbox(flex, row, nowrap, space-between, center)
+
+    &-title
+      margin-bottom 0
+      margin-top 15px
+      line-height 25px
+      margin-right auto
+      padding 0 15px
+
+    &-close
+      margin-left auto
+      margin-right 15px
+      margin-top 15px
+      width 25px
+      height 25px
+      opacity 0.3
+      position relative
+
+      &:hover
+        opacity 1
+
+      &:before, &:after
+        position absolute
+        left 15px
+        content ' '
+        height 26px
+        width 2px
+        background-color $black
+
+      &:before
+        transform rotate(45deg)
+
+      &:after
+        transform rotate(-45deg)
+
+  &__body
+    max-height 100%
+    overflow-y auto
+    padding 25px
+
+    &::-webkit-scrollbar
+      background-color transparent
+      width 0
+
+  &__backdrop
+    position fixed
+    top 0
+    left 0
+    bottom 0
+    right 0
+    z-index 1040
+    background-color $black
+    opacity .4
+
+@media only screen and (max-width 64.000em)
+  .create-modal__header
+    padding 0 16px 0 16px
+
+@media only screen and (max-width 48em)
+  .create-modal__content.centered
+    size(100%)
+    border-radius 0
+
+  .create-modal__body
+    height 100vh

@@ -7,6 +7,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   ViewChild,
@@ -25,6 +26,7 @@ interface IUploadEvent {
   styleUrls: ['./file-uploader.component.styl'],
 })
 export class FileUploaderComponent implements OnInit {
+  @Input() disabled = false;
   @Output() fileUploaded = new EventEmitter<IUploadedFile>();
 
   @ViewChild('fileSelector') fileSelector: ElementRef | undefined;
