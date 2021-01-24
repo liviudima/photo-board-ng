@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 import { IBoard } from 'src/app/types/Boards/IBoard';
+import { IUploadedFile } from 'src/app/types/Files/IUploadedFile';
 
 @Injectable()
 export class BoardApi {
@@ -11,6 +12,7 @@ export class BoardApi {
 
   private routes = {
     board: `${environment.apiHostUrl}/board`,
+    photo: `${environment.apiHostUrl}/board/:boardId/photo`,
   };
 
   async getBoards(): Promise<IBoard[]> {
@@ -31,5 +33,15 @@ export class BoardApi {
       .toPromise();
 
     return res as IBoard;
+  }
+
+  async addPhoto(boardId: string, url: string): Promise<IUploadedFile> {
+    const res: any = await this._http
+      .put(this.routes.photo.replace(':boardId', boardId), {
+        url,
+      })
+      .toPromise();
+
+    return res as IUploadedFile;
   }
 }

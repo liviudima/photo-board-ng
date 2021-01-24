@@ -4,7 +4,10 @@
     <div class="actions-item">
       <div id="uploader">
         <p class="label">Add image to the board</p>
-        <pb-file-uploader [disabled]="!existingBoards"></pb-file-uploader>
+        <pb-file-uploader
+          [disabled]="!existingBoards"
+          [boardId]="selectedBoard._id"
+        ></pb-file-uploader>
       </div>
       <button class="btn btn-secondary home-btn" [disabled]="!existingBoards">
         Run Tagging API
@@ -14,8 +17,16 @@
     <div class="actions-item">
       <div id="board-selector">
         <p class="label">Add image to the board</p>
-        <select class="dropdown" (change)="selectBoard()">
-          <option disabled>Please create a board</option>
+        <select class="dropdown" (change)="selectBoard($event)">
+          <option *ngIf="!existingBoards" disabled>
+            Please create a board
+          </option>
+          <option
+            *ngFor="let board of boards; let idx = index"
+            [selected]="idx === selectedIndex"
+          >
+            {{ board.name }}
+          </option>
         </select>
       </div>
       <button class="btn btn-secondary home-btn" (click)="openBoardModal()">

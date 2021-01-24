@@ -1,29 +1,19 @@
-<input
-  id="file-uploader"
-  type="file"
-  [accept]="acceptTypes"
-  (change)="handleUpload($event)"
-  #fileSelector
-/>
-<div class="file-block">
-  <div class="uploading-bar">
-    <div
-      class="bar-progress"
-      [ngStyle]="{
-        width: percentDone + '%',
-        'transition-duration': transitionDuration + 's'
-      }"
-    >
-      <div class="bar-progress__text">File successfully uploaded!</div>
-    </div>
+<form [formGroup]="fileForm">
+  <div id="file-block">
+    <input
+      type="text"
+      class="inpt"
+      title="Please add an URL"
+      id="upload-input"
+      formControlName="url"
+    />
+    <p *ngIf="validateInput()" class="file-error">{{ errorMessage }}</p>
+    <p *ngIf="!!serverError" class="error">
+      {{ serverError }}
+    </p>
   </div>
-  <p class="file-error">{{ errorMessage }}</p>
-</div>
 
-<button
-  class="btn btn-primary"
-  (click)="openFilePicker()"
-  [disabled]="disabled"
->
-  Add
-</button>
+  <button class="btn btn-primary" (click)="submitFile()" [disabled]="disabled">
+    Add
+  </button>
+</form>
