@@ -7,6 +7,7 @@
         <pb-file-uploader
           [disabled]="!existingBoards"
           [boardId]="selectedBoard._id"
+          (fileUploaded)="addUploadedFile($event)"
         ></pb-file-uploader>
       </div>
       <button class="btn btn-secondary home-btn" [disabled]="!existingBoards">
@@ -31,6 +32,25 @@
       </div>
       <button class="btn btn-secondary home-btn" (click)="openBoardModal()">
         Create a new board
+      </button>
+    </div>
+  </div>
+
+  <div id="photos-container">
+    <pb-photo
+      *ngFor="let photo of selectedBoard.photos"
+      [image]="photo"
+    ></pb-photo>
+  </div>
+
+  <div class="action-row" *ngIf="existingUpdates">
+    <div></div>
+    <div class="actions-item">
+      <button class="btn btn-secondary" (click)="dismissChanges()">
+        Dismiss Changes
+      </button>
+      <button id="save-btn" class="btn btn-primary" (click)="saveBoard()">
+        Save Board
       </button>
     </div>
   </div>

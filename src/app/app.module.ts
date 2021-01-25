@@ -16,11 +16,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { BoardFormComponent } from './components/board-form/board-form.component';
+import { PhotoComponent } from './components/photo/photo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PhotoComponent,
     FileUploaderComponent,
     ModalComponent,
     BoardFormComponent,

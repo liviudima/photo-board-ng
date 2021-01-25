@@ -1,0 +1,15 @@
+<div class="photo">
+  <img
+    [src]="image.optimized.url"
+    [height]="image.optimized.height"
+    [width]="image.optimized.width"
+    alt=""
+  />
+  <p
+    class="tags"
+    [ngStyle]="{ width: image.optimized.width + 'px' }"
+    [title]="tags"
+  >
+    {{ tags }}
+  </p>
+</div>

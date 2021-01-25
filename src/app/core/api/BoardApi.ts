@@ -37,11 +37,28 @@ export class BoardApi {
 
   async addPhoto(boardId: string, url: string): Promise<IUploadedFile> {
     const res: any = await this._http
-      .put(this.routes.photo.replace(':boardId', boardId), {
+      .post(this.routes.photo.replace(':boardId', boardId), {
         url,
       })
       .toPromise();
 
     return res as IUploadedFile;
+  }
+
+  async updateBoardPhotos(
+    boardId: string,
+    photos: IUploadedFile[]
+  ): Promise<void> {
+    await this._http
+      .put(this.routes.photo.replace(':boardId', boardId), {
+        photos,
+      })
+      .toPromise();
+  }
+
+  async dismissBoardChanges(boardId: string): Promise<void> {
+    await this._http
+      .delete(this.routes.photo.replace(':boardId', boardId))
+      .toPromise();
   }
 }

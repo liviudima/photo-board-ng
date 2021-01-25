@@ -42,7 +42,12 @@ export class FileUploaderComponent implements OnInit {
     }
 
     try {
-      await this._boardApi.addPhoto(this.boardId, this.fileForm.value.url);
+      const uploadedFile = await this._boardApi.addPhoto(
+        this.boardId,
+        this.fileForm.value.url
+      );
+      this.fileForm.reset();
+      this.fileUploaded.emit(uploadedFile);
     } catch (err) {
       this.serverError = err.error.message;
     }
@@ -56,12 +61,13 @@ export class FileUploaderComponent implements OnInit {
 
     if (!!errors.required) {
       this.errorMessage = 'Please add an URL.';
+      this.serverError = '';
       return true;
     }
 
     if (!!errors.pattern) {
-      console.log(errors.pattern);
       this.errorMessage = 'Please use a valid URL.';
+      this.serverError = '';
       return true;
     }
 
