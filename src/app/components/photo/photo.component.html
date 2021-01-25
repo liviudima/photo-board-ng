@@ -8,7 +8,9 @@
   <p
     class="tags"
     [ngStyle]="{ width: image.optimized.width + 'px' }"
-    [title]="tags"
+    placement="bottom"
+    [tooltip]="tags"
+    [display]="!!tags.length"
   >
     {{ tags }}
   </p>

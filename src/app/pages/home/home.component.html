@@ -10,7 +10,11 @@
           (fileUploaded)="addUploadedFile($event)"
         ></pb-file-uploader>
       </div>
-      <button class="btn btn-secondary home-btn" [disabled]="!existingBoards">
+      <button
+        class="btn btn-secondary home-btn"
+        [disabled]="!existingBoards"
+        (click)="runTaggingApi()"
+      >
         Run Tagging API
       </button>
     </div>

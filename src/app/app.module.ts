@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FileApi } from './core/api/FileApi';
 import { BoardApi } from './core/api/BoardApi';
 
 import { BoardsResolver } from './core/resolvers/boards.resolver';
@@ -34,8 +34,9 @@ import { PhotoComponent } from './components/photo/photo.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    TooltipModule,
   ],
-  providers: [FileApi, BoardApi, BoardsResolver],
+  providers: [BoardApi, BoardsResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,6 +13,7 @@ export class BoardApi {
   private routes = {
     board: `${environment.apiHostUrl}/board`,
     photo: `${environment.apiHostUrl}/board/:boardId/photo`,
+    tags: `${environment.apiHostUrl}/board/:boardId/photo/tags`,
   };
 
   async getBoards(): Promise<IBoard[]> {
@@ -60,5 +61,17 @@ export class BoardApi {
     await this._http
       .delete(this.routes.photo.replace(':boardId', boardId))
       .toPromise();
+  }
+
+  async getTags(boardId: string): Promise<IUploadedFile[]> {
+    try {
+      const res = await this._http
+        .get(this.routes.tags.replace(':boardId', boardId))
+        .toPromise();
+
+      return res as IUploadedFile[];
+    } catch (err) {
+      return err.message;
+    }
   }
 }

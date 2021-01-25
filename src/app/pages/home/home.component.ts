@@ -54,6 +54,12 @@ export class HomeComponent implements OnInit {
     this.existingUpdates = true;
   }
 
+  async runTaggingApi() {
+    const photosWithTags = await this._boardApi.getTags(this.selectedBoard._id);
+    this.selectedBoard.photos = photosWithTags;
+    this.existingUpdates = true;
+  }
+
   async dismissChanges() {
     if (
       confirm(

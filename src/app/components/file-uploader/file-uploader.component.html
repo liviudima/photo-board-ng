@@ -7,10 +7,12 @@
       id="upload-input"
       formControlName="url"
     />
-    <p *ngIf="validateInput()" class="file-error">{{ errorMessage }}</p>
-    <p *ngIf="!!serverError" class="error">
-      {{ serverError }}
-    </p>
+    <div id="error-block">
+      <p *ngIf="validateInput()" class="file-error">{{ errorMessage }}</p>
+      <p *ngIf="!!serverError" class="error">
+        {{ serverError }}
+      </p>
+    </div>
   </div>
 
   <button class="btn btn-primary" (click)="submitFile()" [disabled]="disabled">
