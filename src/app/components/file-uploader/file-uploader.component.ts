@@ -11,7 +11,6 @@ import { IUploadedFile } from 'src/app/types/Files/IUploadedFile';
   styleUrls: ['./file-uploader.component.styl'],
 })
 export class FileUploaderComponent implements OnInit {
-  @Input() disabled = false;
   @Input() boardId;
   @Output() fileUploaded = new EventEmitter<IUploadedFile>();
 
@@ -27,6 +26,7 @@ export class FileUploaderComponent implements OnInit {
     ],
   });
 
+  disabled = false;
   errorMessage = '';
   serverError = '';
 
@@ -44,6 +44,7 @@ export class FileUploaderComponent implements OnInit {
     if (!this.fileForm.valid) {
       return;
     }
+    this.disabled = true;
 
     try {
       const uploadedFile = await this._boardApi.addPhoto(
@@ -55,6 +56,8 @@ export class FileUploaderComponent implements OnInit {
       this.serverError = '';
     } catch (err) {
       this.serverError = err.error.message;
+    } finally {
+      this.disabled = false;
     }
   }
 
