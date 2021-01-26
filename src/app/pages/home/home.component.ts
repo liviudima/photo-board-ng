@@ -51,10 +51,8 @@ export class HomeComponent implements OnInit {
   addNewBoard(newBoard: IBoard) {
     this.createBoardModal.hide();
     this.boards.push(newBoard);
-    this.selectedIndex = this.boards.findIndex(
-      (board) => board._id === newBoard._id
-    );
-    this.selectedBoard = this.boards[this.selectedIndex];
+    this.existingBoards = true;
+    this._selectBoard(newBoard._id);
     this.existingUpdates = false;
   }
 
