@@ -37,12 +37,14 @@ export class BoardFormComponent implements OnInit {
     }
 
     try {
-      await this._boardApi.createBoard(this.boardForm.value.name);
+      const newBoard = await this._boardApi.createBoard(
+        this.boardForm.value.name
+      );
+      this.boardForm.reset();
+      this.boardCreated.emit(newBoard);
     } catch (err) {
       this.serverError = err.error.message;
     }
-
-    this.boardForm.reset();
   }
 
   validateInput(): boolean {

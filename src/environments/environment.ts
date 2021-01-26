@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
+  // apiHostUrl: 'http://photos-board.eu-4.evennode.com',
   apiHostUrl: 'http://localhost:8080',
 };
 

@@ -35,14 +35,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  selectBoard(event) {
-    this.selectedIndex = this.boards.findIndex(
-      (board) => board.name === event.target.value
-    );
-    this.selectedBoard = this.boards[this.selectedIndex];
-    this.existingUpdates = !!~this.selectedBoard.photos.findIndex(
-      (photo) => photo.temp
-    );
+  changeBoard(event) {
+    this._selectBoard(event.target.value);
   }
 
   openBoardModal() {
@@ -52,6 +46,16 @@ export class HomeComponent implements OnInit {
   addUploadedFile(file: IUploadedFile) {
     this.selectedBoard.photos.splice(0, 0, file);
     this.existingUpdates = true;
+  }
+
+  addNewBoard(newBoard: IBoard) {
+    this.createBoardModal.hide();
+    this.boards.push(newBoard);
+    this.selectedIndex = this.boards.findIndex(
+      (board) => board._id === newBoard._id
+    );
+    this.selectedBoard = this.boards[this.selectedIndex];
+    this.existingUpdates = false;
   }
 
   async runTaggingApi() {
@@ -84,5 +88,15 @@ export class HomeComponent implements OnInit {
       this.selectedBoard.photos
     );
     this.existingUpdates = false;
+  }
+
+  private _selectBoard(boardId: string) {
+    this.selectedIndex = this.boards.findIndex(
+      (board) => board._id === boardId
+    );
+    this.selectedBoard = this.boards[this.selectedIndex];
+    this.existingUpdates = !!~this.selectedBoard.photos.findIndex(
+      (photo) => photo.temp
+    );
   }
 }

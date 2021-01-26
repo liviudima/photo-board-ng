@@ -5,8 +5,7 @@
       <div id="uploader">
         <p class="label">Add image to the board</p>
         <pb-file-uploader
-          [disabled]="!existingBoards"
-          [boardId]="selectedBoard._id"
+          [boardId]="selectedBoard && selectedBoard._id"
           (fileUploaded)="addUploadedFile($event)"
         ></pb-file-uploader>
       </div>
@@ -21,13 +20,14 @@
 
     <div class="actions-item">
       <div id="board-selector">
-        <p class="label">Add image to the board</p>
-        <select class="dropdown" (change)="selectBoard($event)">
+        <p class="label">Select an existing board</p>
+        <select class="dropdown" (change)="changeBoard($event)">
           <option *ngIf="!existingBoards" disabled>
             Please create a board
           </option>
           <option
             *ngFor="let board of boards; let idx = index"
+            [value]="board._id"
             [selected]="idx === selectedIndex"
           >
             {{ board.name }}
@@ -41,11 +41,13 @@
   </div>
 
   <div id="photos-container">
-    <pb-photo
-      *ngFor="let photo of selectedBoard.photos"
-      [image]="photo"
-      class="photo"
-    ></pb-photo>
+    <ng-container *ngIf="selectedBoard">
+      <pb-photo
+        *ngFor="let photo of selectedBoard.photos"
+        [image]="photo"
+        class="photo"
+      ></pb-photo>
+    </ng-container>
   </div>
 
   <div class="action-row" *ngIf="existingUpdates">
@@ -62,5 +64,5 @@
 </div>
 
 <pb-modal title="Create a new board" #createBoardModal>
-  <pb-board-form></pb-board-form>
+  <pb-board-form (boardCreated)="addNewBoard($event)"></pb-board-form>
 </pb-modal>

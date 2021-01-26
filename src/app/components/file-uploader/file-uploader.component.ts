@@ -35,6 +35,11 @@ export class FileUploaderComponent implements OnInit {
   ngOnInit(): void {}
 
   async submitFile() {
+    console.log(this.boardId);
+    if (!this.boardId) {
+      this.serverError = 'In order to upload a photo please select a board.';
+      return;
+    }
     this._validateForm();
 
     if (!this.fileForm.valid) {
